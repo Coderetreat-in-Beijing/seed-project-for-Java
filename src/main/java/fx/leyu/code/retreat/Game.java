@@ -1,9 +1,10 @@
 package fx.leyu.code.retreat;
 
 public class Game {
-    private static int[][] STATES = {
+    private static final int[][] STATES = {
             {0,0,0,1,0,0,0,0},
-            {0,0,1,1,0,0,0,0}};
+            {0,0,1,1,0,0,0,0}
+    };
 
     public static int[][] run(int[][] matrix, int times) {
         int[][] result = new int[matrix.length][matrix[0].length];
@@ -23,7 +24,6 @@ public class Game {
     }
 
     private static int gainNextCellState(int state, int nums) {
-
         return STATES[state][nums];
     }
 
@@ -39,12 +39,12 @@ public class Game {
     }
 
     private static int getNeighbours(int[][] matrix, int m, int n) {
-        int[][] newmatrix = new int[matrix.length+2][matrix[0].length+2];
+        int[][] newmatrix = new int[matrix.length + 2][matrix[0].length + 2];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                newmatrix[i+1][j+1] = matrix[i][j];
+                newmatrix[i + 1][j + 1] = matrix[i][j];
             }
         }
-        return newmatrix[m+1][n+1];
+        return newmatrix[m + 1][n + 1];
     }
 }
