@@ -10,7 +10,7 @@ public class GameTest {
         int[][] matrix = new int[3][3];
         matrix[0][2] = 1;
         matrix[1][1] = 1;
-        matrix = Game.run(matrix, 1);
+        matrix = new Game(matrix).run(1);
 
         assertMatrix(new int[3][3], matrix);
     }
@@ -18,7 +18,7 @@ public class GameTest {
     @Test
     public void testRun02() {
         int[][] matrix = {{1,0,1},{0,1,0},{1,0,1}};
-        matrix = Game.run(matrix, 1);
+        matrix = new Game(matrix).run(1);
         int[][] expected = {{0,1,0},{1,0,1},{0,1,0}};
         assertMatrix(expected, matrix);
     }
@@ -26,7 +26,7 @@ public class GameTest {
     @Test
     public void testRun03() {
         int[][] matrix = {{0,0,1},{0,0,0},{1,0,1}};
-        matrix = Game.run(matrix, 1);
+        matrix = new Game(matrix).run(1);
         int[][] expected = {{0,0,0},{0,1,0},{0,0,0}};
         assertMatrix(expected, matrix);
     }
@@ -34,7 +34,7 @@ public class GameTest {
     @Test
     public void testRun04() {
         int[][] matrix = {{1,0,1},{0,0,0},{0,0,1}};
-        matrix = Game.run(matrix, 1);
+        matrix = new Game(matrix).run(1);
         int[][] expected = {{0,0,0},{0,1,0},{0,0,0}};
         assertMatrix(expected, matrix);
     }
