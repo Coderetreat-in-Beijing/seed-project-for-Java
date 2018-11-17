@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class GameTest {
+
     @Test
     public void testRun() {
         int[][] matrix = new int[3][3];
