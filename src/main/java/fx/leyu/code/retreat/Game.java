@@ -1,41 +1,46 @@
 package fx.leyu.code.retreat;
 
 public class Game {
-    public static int[][] run(int[][] matrix, int times) {
-        // TODO
-        assert (matrix!=null);
-        for(int i = 0; i < times; i++) {
-            for(int j=0;j<matrix.length;j++){
-                for(int k=0;k<matrix[j].length;k++){
-                    matrix[j][k]=shouldLive(matrix,j,k)?1:0;
+    private static int[][] STATES = {{0,0,0,1,0,0,0,0},{0,0,1,1,0,0,0,0}};
+
+    public static int[][] run(int[][] matrix, int i) {
+        for (int inum = 0; i < inum; i++) {
+            for (int row = 0; row < matrix.length; row++) {
+                for (int col = 0; col < matrix[row].length; col++) {
+                    matrix[row][col] = gainNextState(matrix, row, col);
                 }
             }
         }
         return matrix;
     }
 
-    private static boolean shouldLive(int[][] matrix, int j, int k) {
-        int numOfLive=numOfLive(matrix,j,k);
-        if(matrix[j][k]==1){
-            return numOfLive==2||numOfLive==3;
-        }else{
-            return numOfLive==3;
-        }
+    private static int gainNextState(int[][] matrix, int row, int col) {
+        int liveNeighbours = gainLiveNeighbour(matrix, row, col);
+        return gainNextCellState(matrix[row][col], liveNeighbours);
     }
 
-    private static int numOfLive(int[][] matrix, int j, int k) {
-        int numOfLive=0;
-        for(int m=j-1;m<=j+1;m++){
-            for(int n=k-1;n<=k+1;n++){
-                if(m==j&&n==k){
-                    continue;
-                }
-                if(m>=0&&m<matrix.length&&n>=0&&n<matrix[j].length&&matrix[m][n]==1){
-                    numOfLive++;
-                }
+    private static int gainNextCellState(int state, int nums) {
+        return STATES[state][nums];
+    }
+
+    private static int gainLiveNeighbour(int[][] matrix, int row, int col) {
+        int neighbours = 0;
+        for (int i = row - 1; i <= row + 1; i++) {
+            for (int j = col - 1; j <= col + 1; j++) {
+                neighbours += getNeighbours(matrix, i, j);
             }
         }
-        return numOfLive;
+        neighbours -= matrix[row][col];
+        return neighbours;
     }
 
+    private static int getNeighbours(int[][] matrix, int m, int n) {
+        int[][] newmatrix = new int[matrix.length+2][matrix[0].length+2];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length + 1; j++) {
+                newmatrix[i+1][j+1] = matrix[i][j];
+            }
+        }
+        return newmatrix[m+1][n+1];
+    }
 }
