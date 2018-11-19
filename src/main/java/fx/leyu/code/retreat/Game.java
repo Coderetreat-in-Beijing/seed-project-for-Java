@@ -2,8 +2,8 @@ package fx.leyu.code.retreat;
 
 public class Game {
     private static final int[][] STATES = {
-            {0,0,0,1,0,0,0,0},
-            {0,0,1,1,0,0,0,0}
+            {0,0,0,1,0,0,0,0}, // 0
+            {0,0,1,1,0,0,0,0}  // 1
     };
     private final int[][] matrix;
     private final int[][] broad;
@@ -49,11 +49,9 @@ public class Game {
 
     private int gainNumOfLiveNeighbour(int[][] matrix, int row, int col) {
         int result = 0;
-        for (int i = row - 1; i <= row + 1; i++) {
-            for (int j = col - 1; j <= col + 1; j++) {
+        for (int i = row - 1; i <= row + 1; i++)
+            for (int j = col - 1; j <= col + 1; j++)
                 result += broad[i+1][j+1];
-            }
-        }
         return result - matrix[row][col];
     }
 }

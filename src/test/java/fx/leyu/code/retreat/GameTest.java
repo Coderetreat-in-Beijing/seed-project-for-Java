@@ -11,7 +11,6 @@ public class GameTest {
         matrix[0][2] = 1;
         matrix[1][1] = 1;
         matrix = new Game(matrix).run(1);
-
         assertMatrix(new int[3][3], matrix);
     }
 
